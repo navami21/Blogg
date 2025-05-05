@@ -14,19 +14,42 @@ const Blog = () => {
   function updateData(val){
     navigate('/addblog',{state:{val}})
   }
+  const handleDelete = (id) => {
+    if (window.confirm("Are you sure you want to delete this blog?")) {
+      axios.delete(`http://localhost:3000/blogg/delete/${id}`)
+        .then((res) => {
+          if (res.status === 200) {
+            alert('Blog deleted successfully!');
+            setBlogs(blogs.filter(blog => blog._id !== id)); 
+          } else {
+            alert('Failed to delete blog');
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+          alert('An error occurred while deleting the blog');
+        });
+    }
+  };
+  
 
   return (
-    <Box sx={{ flexGrow: 1, padding: 4 }}>
-    <Grid container spacing={2}>
-  {blogs.map((blog, index) => (
+    <Box sx={{ flexGrow: 1, padding: 4, justifyContent:'center' }}>
+      <Typography variant="h4" align="center" gutterBottom>
+        BLOGS
+      </Typography>
+    <Grid container spacing={2} justifyContent="center">
+
+      {blogs.map((blog, index) => (
+
     <Grid item xs={12} md={3} key={index}>
-      <Card sx={{ maxWidth: 600 }}>
+      <Card sx={{ maxWidth: 600 ,backgroundColor:'#E5E1DA',justifyContent: 'center',boxShadow:'0 1px 2px black' }}>
         <CardMedia
-          sx={{ height: 140 , width:300}}
+          sx={{ height: 190 , width:300}}
           image={blog.imageurl}
           title={blog.title}
         />
-        <CardContent>
+        <CardContent sx={{ textAlign: 'center' }} >
           <Typography gutterBottom variant="h5" component="div">
             {blog.title}
           </Typography>
@@ -34,11 +57,11 @@ const Blog = () => {
             {blog.description}
           </Typography>
         </CardContent>
-        <CardActions>
-          <Button  sx={{ backgroundColor: 'green',color:'white' }} onClick={()=>{
+        <CardActions  sx={{ justifyContent: 'center' }}>
+          <Button  sx={{ backgroundColor: 'green',color:'white',fontWeight:'600' }} onClick={()=>{
             updateData(blog)
           }}>UPDATE</Button>
-          <Button sx={{ backgroundColor: 'red',color:'white' }}>DELETE</Button>
+          <Button sx={{ backgroundColor: 'red',color:'white',fontWeight:'600' }}   onClick={() => handleDelete(blog._id)}>DELETE</Button>
         </CardActions>
       </Card>
     </Grid>

@@ -18,12 +18,12 @@ const Navbar = () => {
            
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Blog app
+            Blog-App
           </Typography>
          
-        <Link to={"/blog"}> < Button sx={{ color: 'white' }}>Blog</Button></Link>
-        <Link to={"/addblog"}> < Button sx={{ color: 'white' }}>ADD Blog</Button></Link>
-        <Link to={"/"}> < Button sx={{ color: 'white' }}>Logout</Button></Link>
+        <Link to={"/blog"}> < Button sx={{ color: 'white',fontWeight:'600',fontSize:'16px' }}>Blog</Button></Link>
+        <Link to={"/addblog"}> < Button sx={{ color: 'white',fontWeight:'600',fontSize:'16px' }}>ADD Blog</Button></Link>
+        <Link to={"/"}> < Button sx={{ color: 'white',fontWeight:'600',fontSize:'16px' }}>Logout</Button></Link>
         </Toolbar>
       </AppBar>
     </Box> 
